@@ -1,21 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@700;900&display=swap");
+
 /*
   Modern electronic-paper skin for daily push pages.
   Keep this file shared so future issues can reuse the same visual system.
 */
 :root {
-  --nd-ink: #171412;
-  --nd-ink-soft: #3c352f;
-  --nd-muted: #756b63;
-  --nd-faint: #a79d94;
-  --nd-paper: #f7f4ed;
-  --nd-paper-2: #eee8dd;
-  --nd-card: rgba(255, 253, 249, 0.92);
+  --nd-ink: #181411;
+  --nd-ink-soft: #3e342d;
+  --nd-muted: #74685d;
+  --nd-faint: #a59a8d;
+  --nd-paper: #eee6d8;
+  --nd-paper-2: #e3d8c7;
+  --nd-card: rgba(255, 251, 244, 0.91);
   --nd-line: rgba(61, 49, 38, 0.14);
   --nd-line-strong: rgba(61, 49, 38, 0.25);
-  --nd-accent: #146b63;
-  --nd-accent-2: #8e2246;
-  --nd-gold: #a87618;
-  --nd-blue: #255a7d;
+  --nd-accent: #0f6b62;
+  --nd-accent-2: #9b244f;
+  --nd-gold: #b9821e;
+  --nd-blue: #245d82;
+  --nd-night: #131919;
+  --nd-night-2: #26302e;
   --nd-shadow: 0 22px 70px rgba(43, 35, 29, 0.13);
   --nd-radius: 8px;
   --nd-max: 1240px;
@@ -23,16 +27,19 @@
 
 html {
   scroll-padding-top: 28px;
+  overflow-x: hidden;
 }
 
 body {
   color: var(--nd-ink);
   background:
-    radial-gradient(circle at 12% 8%, rgba(20, 107, 99, 0.11), transparent 28%),
-    radial-gradient(circle at 86% 2%, rgba(168, 118, 24, 0.13), transparent 30%),
-    linear-gradient(180deg, rgba(247, 244, 237, 0.96), rgba(249, 247, 242, 0.98)),
+    linear-gradient(180deg, rgba(15, 19, 20, 0.98) 0, rgba(34, 43, 42, 0.94) 430px, rgba(238, 230, 216, 0.98) 720px),
+    linear-gradient(115deg, rgba(15, 107, 98, 0.34) 0, transparent 32%, rgba(185, 130, 30, 0.24) 72%, transparent 100%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.025) 0, rgba(255, 255, 255, 0.025) 1px, transparent 1px, transparent 34px),
     var(--nd-paper) !important;
+  font-family: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif !important;
   font-feature-settings: "palt";
+  overflow-x: hidden;
 }
 
 body::before {
@@ -43,10 +50,11 @@ body::before {
   z-index: -1;
   opacity: 0.34;
   background-image:
-    linear-gradient(rgba(34, 28, 23, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(34, 28, 23, 0.035) 1px, transparent 1px);
-  background-size: 28px 28px, 28px 28px;
-  mask-image: linear-gradient(180deg, black, transparent 80%);
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(rgba(34, 28, 23, 0.035) 1px, transparent 1px);
+  background-size: 34px 34px, 34px 34px, 12px 12px;
+  mask-image: linear-gradient(180deg, black 0, black 460px, rgba(0, 0, 0, 0.26) 900px, transparent 100%);
 }
 
 body.nd-modal-open {
@@ -82,12 +90,40 @@ a {
   padding-right: clamp(18px, 3vw, 34px) !important;
 }
 
+.page > .kicker:first-child {
+  margin-top: 28px;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: rgba(255, 248, 235, 0.82) !important;
+}
+
+.page > .kicker:first-child + h1 {
+  color: #fff8eb;
+  text-shadow: 0 18px 60px rgba(0, 0, 0, 0.32);
+}
+
+.page > .kicker:first-child + h1 + .intro {
+  color: rgba(255, 248, 235, 0.76) !important;
+}
+
 .hero {
   position: relative;
-  min-height: 500px !important;
+  width: 100vw;
+  min-height: 560px !important;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-left: max(clamp(18px, 3vw, 34px), calc((100vw - var(--nd-max)) / 2 + 34px)) !important;
+  padding-right: max(clamp(18px, 3vw, 34px), calc((100vw - var(--nd-max)) / 2 + 34px)) !important;
   align-items: center !important;
   border-bottom: 0 !important;
-  padding: 64px 0 54px !important;
+  padding-top: 76px !important;
+  padding-bottom: 64px !important;
+  overflow: hidden;
+  background:
+    linear-gradient(115deg, rgba(9, 13, 14, 0.92), rgba(22, 33, 33, 0.86) 42%, rgba(45, 37, 29, 0.74)),
+    linear-gradient(28deg, rgba(15, 107, 98, 0.34), transparent 44%),
+    linear-gradient(135deg, transparent 0, rgba(255, 255, 255, 0.08) 48%, transparent 49%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0, rgba(255, 255, 255, 0.05) 1px, transparent 1px, transparent 42px);
 }
 
 .hero::after {
@@ -96,8 +132,8 @@ a {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--nd-line-strong), transparent);
+  height: 220px;
+  background: linear-gradient(180deg, transparent, rgba(238, 230, 216, 0.96));
 }
 
 .hero > div {
@@ -109,20 +145,27 @@ a {
   content: "";
   position: absolute;
   z-index: -1;
-  inset: -26px auto auto -28px;
-  width: 118px;
-  height: 118px;
-  border: 1px solid rgba(20, 107, 99, 0.22);
+  inset: -24px auto auto -24px;
+  width: 5px;
+  height: 170px;
   border-radius: 999px;
-  background: rgba(20, 107, 99, 0.06);
+  background: linear-gradient(180deg, var(--nd-accent), var(--nd-gold));
+  box-shadow: 0 0 42px rgba(20, 107, 99, 0.36);
 }
 
 .kicker {
-  border-color: var(--nd-line) !important;
-  background: rgba(255, 253, 249, 0.76) !important;
-  color: var(--nd-muted) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: rgba(255, 248, 235, 0.78) !important;
   backdrop-filter: blur(14px);
   box-shadow: 0 8px 24px rgba(43, 35, 29, 0.06);
+}
+
+h1,
+h2,
+h3,
+.title {
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STZhongsong", "Noto Sans SC", serif !important;
 }
 
 h1 {
@@ -132,22 +175,27 @@ h1 {
   letter-spacing: 0 !important;
 }
 
+.hero h1 {
+  color: #fff8eb;
+  text-shadow: 0 22px 70px rgba(0, 0, 0, 0.36);
+}
+
 .hero p {
   max-width: 820px !important;
-  color: var(--nd-ink-soft) !important;
+  color: rgba(255, 248, 235, 0.76) !important;
   font-size: clamp(17px, 1.55vw, 21px) !important;
 }
 
 .layout {
   grid-template-columns: 230px minmax(0, 1fr) !important;
   gap: clamp(28px, 4vw, 58px) !important;
-  padding-top: 42px !important;
+  padding-top: 48px !important;
 }
 
 .toc {
   top: 26px !important;
   border-color: var(--nd-line) !important;
-  background: rgba(255, 253, 249, 0.78) !important;
+  background: rgba(255, 249, 240, 0.82) !important;
   backdrop-filter: blur(18px);
   box-shadow: 0 16px 40px rgba(43, 35, 29, 0.09) !important;
 }
@@ -217,6 +265,23 @@ footer {
   border-color: var(--nd-line) !important;
   background: var(--nd-card) !important;
   box-shadow: 0 14px 44px rgba(43, 35, 29, 0.08);
+}
+
+.latest,
+.archive {
+  position: relative;
+}
+
+.latest::before,
+.archive::before {
+  content: "";
+  position: absolute;
+  inset: -16px -14px;
+  z-index: -1;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 14px;
+  background: rgba(238, 230, 216, 0.2);
+  pointer-events: none;
 }
 
 .brief {
