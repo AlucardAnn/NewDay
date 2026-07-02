@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>推送归档</title>
+  <style>
+    :root {
+      --ink: #24211f;
+      --muted: #6d625b;
+      --line: #ded7ce;
+      --paper: #fbfaf7;
+      --panel: #ffffff;
+      --accent: #0f766e;
+      --soft: #e1f4ef;
+      --blue: #335c81;
+      --shadow: 0 18px 54px rgba(46, 38, 31, 0.12);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.96)),
+        repeating-linear-gradient(90deg, #f3eee7 0, #f3eee7 1px, transparent 1px, transparent 24px),
+        var(--paper);
+      font: 16px/1.75 -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+      letter-spacing: 0;
+    }
+    a { color: inherit; text-decoration: none; }
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 72px 22px 56px;
+    }
+    .kicker {
+      display: inline-flex;
+      width: fit-content;
+      margin-bottom: 18px;
+      padding: 4px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.78);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(44px, 7vw, 86px);
+      line-height: 1;
+      font-weight: 780;
+    }
+    .intro {
+      max-width: 720px;
+      margin: 24px 0 46px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+    .latest {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 18px;
+      margin-bottom: 32px;
+    }
+    .card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 20px;
+      align-items: center;
+      min-height: 170px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+    .card:hover {
+      border-color: #b8dcd7;
+      background: linear-gradient(0deg, rgba(225,244,239,.58), rgba(255,255,255,.94));
+    }
+    .date {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .title {
+      margin: 0 0 10px;
+      font-size: 28px;
+      line-height: 1.25;
+      font-weight: 760;
+    }
+    .summary {
+      margin: 0;
+      color: var(--muted);
+    }
+    .arrow {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--accent);
+      font-size: 24px;
+      font-weight: 700;
+    }
+    .archive {
+      margin-top: 38px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+    .archive h2 {
+      margin: 0 0 16px;
+      font-size: 22px;
+    }
+    .archive-list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .archive-list a {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255,255,255,.82);
+    }
+    .archive-list a:hover {
+      border-color: #b8dcd7;
+    }
+    .muted {
+      color: var(--muted);
+    }
+    footer {
+      margin-top: 42px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    @media (max-width: 680px) {
+      .page { padding: 44px 16px 40px; }
+      .card { grid-template-columns: 1fr; }
+      .arrow { width: 38px; height: 38px; }
+      .archive-list a { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="kicker">GitHub Pages ready</div>
+    <h1>推送归档</h1>
+    <p class="intro">这里收纳每天的图文推送。最新一篇在最上方，适合直接部署到 GitHub Pages 后分享给朋友浏览。</p>
+
+    <section class="latest" aria-label="最新推送">
+      <a class="card" href="daily-interest-2026-07-02.html">
+        <div>
+          <span class="date">2026.07.02</span>
+          <p class="title">2026.07.02 推送</p>
+          <p class="summary">上海出门/回家天气、银魂 `るかっぷ` 迷你系列、G.E.M 神威限定复刻、ONE PIECE 一番赏、BW2026 票务状态。</p>
+        </div>
+        <span class="arrow" aria-hidden="true">›</span>
+      </a>
+    </section>
+
+    <section class="archive" aria-label="历史推送">
+      <h2>历史推送</h2>
+      <ul class="archive-list">
+        <li>
+          <a href="daily-interest-2026-07-02.html">
+            <span>2026.07.02 推送</span>
+            <span class="muted">银魂商品线 / 上海天气 / BW2026</span>
+          </a>
+        </li>
+        <li>
+          <a href="daily-interest-2026-07-01.html">
+            <span>2026.07.01 推送</span>
+            <span class="muted">周边图文试排版 / 银魂木制立牌</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <footer>部署提示：把本目录所有文件上传到 GitHub 仓库根目录，开启 GitHub Pages 的 main / root 发布源即可。</footer>
+  </main>
+</body>
+</html>

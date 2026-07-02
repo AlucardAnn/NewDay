@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2026.07.01 推送</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #24211f;
+      --muted: #6c625c;
+      --line: #ded8d0;
+      --paper: #fbfaf7;
+      --panel: #ffffff;
+      --accent: #0f766e;
+      --accent-soft: #dff3ef;
+      --rose: #b4234c;
+      --gold: #9b6b12;
+      --blue: #335c81;
+      --shadow: 0 18px 60px rgba(46, 38, 31, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.96)),
+        repeating-linear-gradient(90deg, #f4efe8 0, #f4efe8 1px, transparent 1px, transparent 24px),
+        var(--paper);
+      font: 16px/1.75 -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      background: #f2eee8;
+    }
+
+    .page {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 22px 56px;
+    }
+
+    .hero {
+      min-height: 420px;
+      display: grid;
+      align-items: end;
+      padding: 48px 0 30px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .kicker {
+      display: inline-flex;
+      width: fit-content;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 18px;
+      padding: 4px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    h1 {
+      max-width: 840px;
+      margin: 0;
+      font-size: clamp(42px, 6vw, 76px);
+      line-height: 1;
+      font-weight: 780;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 24px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 42px;
+      align-items: start;
+      padding-top: 34px;
+    }
+
+    .toc {
+      position: sticky;
+      top: 22px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: 0 8px 24px rgba(46, 38, 31, 0.06);
+    }
+
+    .toc strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .toc a {
+      display: block;
+      padding: 8px 0;
+      color: var(--muted);
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      color: var(--ink);
+    }
+
+    article {
+      min-width: 0;
+    }
+
+    section {
+      margin-bottom: 54px;
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      font-size: 30px;
+      line-height: 1.25;
+    }
+
+    h3 {
+      margin: 28px 0 12px;
+      font-size: 21px;
+      line-height: 1.35;
+    }
+
+    p {
+      margin: 0 0 14px;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .brief-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .brief {
+      min-height: 150px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .brief time,
+    .brief .tag {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .brief strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .news-list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .news-list li {
+      padding: 16px 18px;
+      border-left: 4px solid var(--accent);
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .news-list strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .merch-lead {
+      margin: 0 0 22px;
+      padding: 18px 20px;
+      border: 1px solid #b8dcd7;
+      border-radius: 8px;
+      background: var(--accent-soft);
+    }
+
+    .merch-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .merch-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+    }
+
+    .merch-card.feature {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+      align-items: stretch;
+    }
+
+    .media {
+      min-height: 260px;
+      display: grid;
+      place-items: center;
+      background: #f1ece5;
+    }
+
+    .feature .media {
+      min-height: 420px;
+    }
+
+    .media img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .merch-body {
+      padding: 20px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: #f3f0ea;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .pill.hot {
+      background: #fbe4ea;
+      color: var(--rose);
+    }
+
+    .pill.buy {
+      background: #fff1cf;
+      color: var(--gold);
+    }
+
+    .source {
+      margin-top: 14px;
+      font-size: 14px;
+    }
+
+    .event-table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .event-table th,
+    .event-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .event-table th {
+      background: #f2eee8;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .event-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .updated {
+      margin-top: 36px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 860px) {
+      .page {
+        padding: 0 16px 42px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 44px;
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+        gap: 22px;
+      }
+
+      .toc {
+        position: static;
+      }
+
+      .brief-grid,
+      .merch-grid,
+      .merch-card.feature {
+        grid-template-columns: 1fr;
+      }
+
+      .feature .media,
+      .media {
+        min-height: 240px;
+      }
+
+      .event-table,
+      .event-table tbody,
+      .event-table tr,
+      .event-table th,
+      .event-table td {
+        display: block;
+        width: 100%;
+      }
+
+      .event-table th {
+        border-bottom: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div>
+        <div class="kicker">Shanghai · 10:00 推送试排版</div>
+        <h1>2026.07.01 推送</h1>
+        <p>今天这版把周边栏目改成图文阅读流：先看出门和回家天气，再扫全球新闻，最后集中看银魂、ONE PIECE、光死去的夏天、黑执事和 CLAMP 相关新品与活动。</p>
+      </div>
+    </header>
+
+    <div class="layout">
+      <nav class="toc" aria-label="文章目录">
+        <strong>今天读什么</strong>
+        <a href="#weather">上海天气</a>
+        <a href="#news">各国大事</a>
+        <a href="#merch">周边图文</a>
+        <a href="#events">上海活动</a>
+      </nav>
+
+      <article>
+        <section id="weather">
+          <h2>上海天气：按你的出门和回家时间看</h2>
+          <p class="note">今天按上海城区预报整理，实际降雨可能有局地差异；临出门前仍建议看一眼雷达图或手机天气。</p>
+
+          <div class="brief-grid">
+            <div class="brief">
+              <time>10:00-11:00 出门</time>
+              <strong>明显降雨天，伞要带大的。</strong>
+              <p>白天有暴雨/中雨信号，气温约 25℃上下，体感闷湿。建议穿不怕溅水的鞋，包里电子设备做防水，地铁换乘留出排队和积水绕行时间。</p>
+            </div>
+            <div class="brief">
+              <time>21:00-22:00 回家</time>
+              <strong>夜间转小雨/阵雨，路面仍可能湿滑。</strong>
+              <p>晚间雨势预计比白天弱，但低洼路段可能还有积水。回家时优先选择熟悉路线，打车和公交可能因天气延迟。</p>
+            </div>
+          </div>
+          <p class="source">来源：<a href="https://weather.cma.cn/web/weather/58367.html" target="_blank" rel="noopener">中央气象台上海城市预报</a></p>
+        </section>
+
+        <section id="news">
+          <h2>各国大事和有趣新闻</h2>
+          <ul class="news-list">
+            <li>
+              <strong>中国：新版对外投资规定今日起施行。</strong>
+              企业境外投资的合规流程和监管口径会受到影响，适合关注中国企业出海、并购和海外项目的人看。来源：<a href="https://english.www.gov.cn/policies/latestreleases/202606/01/content_WS6a1d2e29c6d00ca5f9a0b59e.html" target="_blank" rel="noopener">中国政府网英文版</a>
+            </li>
+            <li>
+              <strong>美国：最高法院维持出生公民权。</strong>
+              特朗普限制出生公民权的做法被否决，移民法、宪法解释和美国选举议题都会继续发酵。来源：<a href="https://apnews.com/article/c73cf0c70bb550ebf0a55fafddbd935c" target="_blank" rel="noopener">AP</a>
+            </li>
+            <li>
+              <strong>委内瑞拉：强震后救援压力仍在扩大。</strong>
+              建筑损毁、人道救援和医疗承压成为后续焦点。来源：<a href="https://www.theguardian.com/world/2026/jun/30/tonnes-and-tonnes-of-rubble-more-than-58000-buildings-estimated-to-have-been-destroyed-in-venezuela-earthquakes" target="_blank" rel="noopener">The Guardian</a>
+            </li>
+            <li>
+              <strong>欧洲：中东欧继续高温预警。</strong>
+              极端高温对出行、能源和公共健康都有影响，暑期欧洲旅行需要关注当地预警。来源：<a href="https://www.theguardian.com/environment/2026/jun/29/dangerous-temperatures-forecast-central-eastern-europe-heatwave" target="_blank" rel="noopener">The Guardian</a>
+            </li>
+            <li>
+              <strong>丹麦：发现大型维京时代纺织生产遗址。</strong>
+              历史爱好者会喜欢的一条，说明维京时期纺织生产规模可能比大众印象更复杂。来源：<a href="https://apnews.com/article/54f9b57b5485aa602591185ff3b911cd" target="_blank" rel="noopener">AP</a>
+            </li>
+            <li>
+              <strong>影视/科技：OpenAI 题材电影《Artificial》改由 Neon 接手。</strong>
+              科技公司、电影产业和当代名人叙事交叉，后续选角与发行值得看。来源：<a href="https://apnews.com/article/openai-artificial-amazon-neon-6879fc8605701a3254f0f4fedb7a2e8c" target="_blank" rel="noopener">AP</a>
+            </li>
+          </ul>
+        </section>
+
+        <section id="merch">
+          <h2>动漫/漫画周边新品和预售</h2>
+          <div class="merch-lead">
+            今天的周边栏按新范围重新扫：不只看手办和大厂官网，也把 Plex/Xebec 这类中小厂、代理商、快闪店、在线抽赏、店铺特典和情报站纳入。以下商品不含《我的英雄学院》。
+          </div>
+
+          <div class="merch-grid">
+            <article class="merch-card feature">
+              <div class="media">
+                <img src="assets/gintama-wood-stand.png" alt="银魂 木制立牌 和装振り向き Ver. 商品图">
+              </div>
+              <div class="merch-body">
+                <div class="meta">
+                  <span class="pill hot">银魂</span>
+                  <span class="pill">Plex / Xebec</span>
+                  <span class="pill buy">1,650 日元含税</span>
+                </div>
+                <h3>银魂 木製スタンド 和装×振り向き Ver.</h3>
+                <p>这就是你在群里看到的那类商品：不是手办大厂首页重点位，但很适合日常收。全 6 种，包含坂田银时、土方十四郎、冲田总悟、桂小太郎、高杉晋助、神威。MDF 材质，板件约 W102 × H155mm，开放式包装。</p>
+                <p><strong>现在能做什么：</strong>后续重点蹲 Plex/Xebec 公告、日本零售店和代购上架。今天页面抓取时 Xebec 站点 TLS 返回不稳定，所以这里使用你提供的商品图并标注厂商信息。</p>
+                <p class="source">参考渠道：<a href="https://xebec-news.xebec.jp/?eid=198" target="_blank" rel="noopener">Xebec News 商品页</a></p>
+              </div>
+            </article>
+
+            <article class="merch-card">
+              <div class="media">
+                <img src="https://sf.1kuji.com/1kuji_onepiece/portal/ogp.jpg" alt="ONE PIECE 一番赏官方图">
+              </div>
+              <div class="merch-body">
+                <div class="meta">
+                  <span class="pill hot">ONE PIECE</span>
+                  <span class="pill">一番赏</span>
+                  <span class="pill buy">7月3日开售</span>
+                </div>
+                <h3>エルバフ編 GIANT BASH!! Vol.1</h3>
+                <p>790 日元/抽，奖品含路飞、乌索普、娜美、东利等 MASTERLISE EXPIECE。渠道含 7-11、伊藤洋华堂、ゆめタウン、麦わらストア。</p>
+                <p><strong>现在能做什么：</strong>7月3日蹲日本线下门店、麦わらストア和代抽渠道。</p>
+                <p class="source">来源：<a href="https://sf.1kuji.com/1kuji_onepiece/" target="_blank" rel="noopener">一番赏 ONE PIECE 官方页</a></p>
+              </div>
+            </article>
+
+            <article class="merch-card">
+              <div class="media">
+                <img src="https://tamashiiweb.com/storage/images/products/thumbnail/6e76c48d-0c3e-424c-a2fd-5a8dfb79a936.webp" alt="S.H.Figuarts 妮可罗宾商品图">
+              </div>
+              <div class="merch-body">
+                <div class="meta">
+                  <span class="pill hot">ONE PIECE</span>
+                  <span class="pill">S.H.Figuarts</span>
+                  <span class="pill buy">9,350 日元</span>
+                </div>
+                <h3>ニコ・ロビン -エニエス・ロビー-</h3>
+                <p>7月1日预约开始，2026年12月发售。日本渠道页面列出 Amazon、AmiAmi、BicCamera、Yodobashi 等。</p>
+                <p><strong>现在能做什么：</strong>今天可直接查各店预约状态；热门角色有截单风险，想要就不要拖太久。</p>
+                <p class="source">来源：<a href="https://tamashiiweb.com/item/15906/" target="_blank" rel="noopener">魂ウェブ商品页</a></p>
+              </div>
+            </article>
+
+            <article class="merch-card">
+              <div class="media">
+                <img src="https://store.kadokawa.co.jp/img/goods/S/302605000196.jpg" alt="光が死んだ夏 亚克力板商品图">
+              </div>
+              <div class="merch-body">
+                <div class="meta">
+                  <span class="pill hot">光死去的夏天</span>
+                  <span class="pill">KADOKAWA</span>
+                  <span class="pill buy">3,300 日元</span>
+                </div>
+                <h3>光が死んだ夏 アクリルプレート</h3>
+                <p>Newtype Anime Market 系列，页面显示 2026年9月予定。KADOKAWA 当前列表可看到 129 件相关商品。</p>
+                <p><strong>现在能做什么：</strong>页面显示该件销售期结束，适合先看图柄，蹲再贩、Animate/AmiAmi 库存或其他店铺同步上架。</p>
+                <p class="source">来源：<a href="https://store.kadokawa.co.jp/shop/series/seriesM2490" target="_blank" rel="noopener">KADOKAWA 光が死んだ夏系列页</a></p>
+              </div>
+            </article>
+
+            <article class="merch-card">
+              <div class="media">
+                <img src="https://store.kadokawa.co.jp/img/goods/S/302605000197.jpg" alt="光が死んだ夏 亚克力立牌商品图">
+              </div>
+              <div class="merch-body">
+                <div class="meta">
+                  <span class="pill hot">光死去的夏天</span>
+                  <span class="pill">KADOKAWA</span>
+                  <span class="pill buy">1,980 日元</span>
+                </div>
+                <h3>光が死んだ夏 アクリルスタンド（A）</h3>
+                <p>同属 2026年9月予定新品。光夏近期还有官方 1 周年企划：池袋 POP UP SHOP、在线抽赏、Animate Fair、10月下旬部分门店周边 Fair。</p>
+                <p><strong>现在能做什么：</strong>重点等官方公开 Fair 条件、特典和在线抽赏图柄。</p>
+                <p class="source">来源：<a href="https://hikanatsu-anime.com/special/1stAnniv.html" target="_blank" rel="noopener">光夏 1 周年企划</a></p>
+              </div>
+            </article>
+
+            <article class="merch-card">
+              <div class="media">
+                <img src="https://cloverworks.co.jp/wp/wp-content/uploads/2026/05/news_kuroshitsuji_ps_ew_shedbyacg_ppshop01.jpg" alt="黑执事 CloverWorks POP UP SHOP 官方图">
+              </div>
+              <div class="merch-body">
+                <div class="meta">
+                  <span class="pill hot">黑执事</span>
+                  <span class="pill">CloverWorks</span>
+                  <span class="pill buy">满 2,200 日元特典</span>
+                </div>
+                <h3>寄宿学校编 / 绿之魔女编 POP UP SHOP</h3>
+                <p>购买黑执事相关商品满 2,200 日元有原画イラストカード特典。适合关注新章动画图柄和会场/通販后续。</p>
+                <p><strong>现在能做什么：</strong>蹲官方店铺、事后通販、特典剩余状态。</p>
+                <p class="source">来源：<a href="https://cloverworks.co.jp/news/20260525/" target="_blank" rel="noopener">CloverWorks News</a></p>
+              </div>
+            </article>
+
+            <article class="merch-card">
+              <div class="media">
+                <img src="https://magazine.jp.square-enix.com/gfantasy/story/kuroshitsuji/BL10th/images/twitter_card.jpg?new" alt="黑执事 Black Label Memorial Arcade 官方图">
+              </div>
+              <div class="merch-body">
+                <div class="meta">
+                  <span class="pill hot">黑执事</span>
+                  <span class="pill">Square Enix</span>
+                  <span class="pill">Black Label</span>
+                </div>
+                <h3>Black Label Memorial Arcade</h3>
+                <p>大阪会场已结束，但官方页面保留商品与活动信息。黑执事 Black Label 系列经常有高质感杂货，值得蹲会后贩售。</p>
+                <p><strong>现在能做什么：</strong>关注 Square Enix / GFantasy 后续通販公告。</p>
+                <p class="source">来源：<a href="https://magazine.jp.square-enix.com/gfantasy/story/kuroshitsuji/BL10th/" target="_blank" rel="noopener">官方专题页</a></p>
+              </div>
+            </article>
+
+            <article class="merch-card">
+              <div class="media">
+                <img src="https://www.clamp-ex.jp/assets/img/banner_j_non.png" alt="CLAMP展官方图">
+              </div>
+              <div class="merch-body">
+                <div class="meta">
+                  <span class="pill hot">CLAMP</span>
+                  <span class="pill">展会 / 官方店</span>
+                  <span class="pill buy">韩国巡回至 7月19日</span>
+                </div>
+                <h3>CLAMP 展与 CLAMP FANS SHOP</h3>
+                <p>CLAMP 展韩国巡回到 7月19日；CLAMP FANS SHOP 覆盖《魔卡少女樱》《xxxHOLiC》《魔法骑士雷阿斯》等原作向周边。</p>
+                <p><strong>现在能做什么：</strong>关注现场限定、海外代购和事后通販。</p>
+                <p class="source">来源：<a href="https://www.clamp-ex.jp/" target="_blank" rel="noopener">CLAMP 展官网</a> / <a href="https://prtimes.jp/main/html/rd/p/000008179.000016756.html" target="_blank" rel="noopener">PR TIMES</a></p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="events">
+          <h2>上海活动和票务</h2>
+          <table class="event-table">
+            <tbody>
+              <tr>
+                <th>BW2026</th>
+                <td>
+                  <strong>7月10-12日，国家会展中心上海。</strong><br>
+                  第三轮开票原定 6月30日 18:00，因技术原因延期；截至今天检索，重新开票时间未见官方明确公布。现在能做的是蹲 BilibiliWorld园长、BW 官网和哔哩哔哩会员购，不建议收非官方票。<br>
+                  来源：<a href="https://bw.bilibili.com/" target="_blank" rel="noopener">BW 官网</a> / <a href="https://www.sina.cn/news/detail/5315573332317007.html" target="_blank" rel="noopener">新浪同步页</a>
+                </td>
+              </tr>
+              <tr>
+                <th>音乐剧</th>
+                <td>
+                  <strong>上海文化广场：</strong>《基督山伯爵》中文版 7月8-11日，80-1080 元；《粉丝来信》中文版 7月30日-8月1日，80-680 元。<br>
+                  来源：<a href="https://www.shcstheatre.com/Program/programList.aspx" target="_blank" rel="noopener">上海文化广场节目列表</a>
+                </td>
+              </tr>
+              <tr>
+                <th>演唱会</th>
+                <td>
+                  <strong>王源上海站：</strong>7月3-5日，虹口足球场，平台含大麦、猫眼、票星球。<br>
+                  <strong>单依纯上海站：</strong>7月17-19日，梅赛德斯-奔驰文化中心，平台含大麦、猫眼、携程。<br>
+                  现在能做什么：查官方平台余票/回流，避免非官方高价票。
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <p class="updated">本页为 2026-07-01 试排版版。飞书版只发送文字和链接；Codex/网页版重点在周边栏目展示图片。</p>
+      </article>
+    </div>
+  </main>
+</body>
+</html>
