@@ -53,7 +53,7 @@
     const allButton = document.createElement("button");
     allButton.className = "merch-filter is-active";
     allButton.type = "button";
-    allButton.textContent = "全部";
+    allButton.textContent = "\u5168\u90e8";
     toolbar.append(allButton);
 
     labels.forEach((label) => {
@@ -75,7 +75,7 @@
       });
       cards.forEach((card) => {
         const label = card.querySelector(".pill.hot")?.textContent?.trim();
-        card.classList.toggle("is-hidden", filter !== "全部" && label !== filter);
+        card.classList.toggle("is-hidden", filter !== "\u5168\u90e8" && label !== filter);
       });
     });
   });
@@ -85,7 +85,7 @@
   modal.setAttribute("role", "dialog");
   modal.setAttribute("aria-modal", "true");
   modal.innerHTML = `
-    <button class="image-modal__close" type="button" aria-label="关闭图片">×</button>
+    <button class="image-modal__close" type="button" aria-label="\u5173\u95ed\u56fe\u7247">\u00d7</button>
     <div class="image-modal__inner">
       <img alt="">
       <div class="image-modal__caption"></div>
@@ -122,7 +122,7 @@
   const topButton = document.createElement("button");
   topButton.className = "back-to-top";
   topButton.type = "button";
-  topButton.setAttribute("aria-label", "回到顶部");
+  topButton.setAttribute("aria-label", "\u56de\u5230\u9876\u90e8");
   topButton.textContent = "↑";
   body.append(topButton);
   topButton.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
