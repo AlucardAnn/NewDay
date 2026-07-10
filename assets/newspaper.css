@@ -25,6 +25,12 @@
   --nd-max: 1240px;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
   scroll-padding-top: 28px;
   overflow-x: hidden;
@@ -590,7 +596,19 @@ footer {
   }
 
   h1 {
-    font-size: clamp(42px, 15vw, 64px) !important;
+    max-width: 100% !important;
+    font-size: 40px !important;
+    line-height: 1.08 !important;
+  }
+
+  .hero h1 {
+    overflow-wrap: anywhere;
+  }
+
+  h2,
+  h3 {
+    max-width: 100%;
+    overflow-wrap: anywhere;
   }
 
   .brief-grid,
@@ -615,6 +633,12 @@ footer {
   .event-table td {
     display: block;
     width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  h1 {
+    font-size: 36px !important;
   }
 }
 
