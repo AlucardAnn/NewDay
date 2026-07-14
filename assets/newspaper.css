@@ -190,6 +190,11 @@ h1 {
   max-width: 820px !important;
   color: rgba(255, 248, 235, 0.76) !important;
   font-size: clamp(17px, 1.55vw, 21px) !important;
+  overflow-wrap: anywhere;
+}
+
+.mobile-break {
+  display: none;
 }
 
 .layout {
@@ -603,6 +608,17 @@ footer {
 
   .hero h1 {
     overflow-wrap: anywhere;
+  }
+
+  .hero p,
+  article p,
+  .news-list li {
+    max-width: 100% !important;
+    overflow-wrap: anywhere;
+  }
+
+  .mobile-break {
+    display: inline;
   }
 
   h2,
