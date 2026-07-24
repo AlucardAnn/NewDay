@@ -615,6 +615,8 @@ footer {
   .news-list li {
     max-width: 100% !important;
     overflow-wrap: anywhere;
+    word-break: break-word;
+    line-break: anywhere;
   }
 
   .mobile-break {
